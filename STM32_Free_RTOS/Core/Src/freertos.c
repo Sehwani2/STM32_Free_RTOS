@@ -48,6 +48,9 @@
 
 /* USER CODE END Variables */
 osThreadId defaultTaskHandle;
+osThreadId signalTask1Handle;
+osThreadId signalTask2Handle;
+osThreadId signalTask3Handle;
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
@@ -55,6 +58,9 @@ osThreadId defaultTaskHandle;
 /* USER CODE END FunctionPrototypes */
 
 void StartDefaultTask(void const * argument);
+void StartSignalTask1(void const * argument);
+void StartSignalTask2(void const * argument);
+void StartSignalTask3(void const * argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
@@ -105,6 +111,18 @@ void MX_FREERTOS_Init(void) {
   osThreadDef(defaultTask, StartDefaultTask, osPriorityNormal, 0, 128);
   defaultTaskHandle = osThreadCreate(osThread(defaultTask), NULL);
 
+  /* definition and creation of signalTask1 */
+  osThreadDef(signalTask1, StartSignalTask1, osPriorityIdle, 0, 128);
+  signalTask1Handle = osThreadCreate(osThread(signalTask1), NULL);
+
+  /* definition and creation of signalTask2 */
+  osThreadDef(signalTask2, StartSignalTask2, osPriorityIdle, 0, 128);
+  signalTask2Handle = osThreadCreate(osThread(signalTask2), NULL);
+
+  /* definition and creation of signalTask3 */
+  osThreadDef(signalTask3, StartSignalTask3, osPriorityIdle, 0, 128);
+  signalTask3Handle = osThreadCreate(osThread(signalTask3), NULL);
+
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
   /* USER CODE END RTOS_THREADS */
@@ -127,6 +145,60 @@ void StartDefaultTask(void const * argument)
     osDelay(1);
   }
   /* USER CODE END StartDefaultTask */
+}
+
+/* USER CODE BEGIN Header_StartSignalTask1 */
+/**
+* @brief Function implementing the signalTask1 thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_StartSignalTask1 */
+void StartSignalTask1(void const * argument)
+{
+  /* USER CODE BEGIN StartSignalTask1 */
+  /* Infinite loop */
+  for(;;)
+  {
+    osDelay(1);
+  }
+  /* USER CODE END StartSignalTask1 */
+}
+
+/* USER CODE BEGIN Header_StartSignalTask2 */
+/**
+* @brief Function implementing the signalTask2 thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_StartSignalTask2 */
+void StartSignalTask2(void const * argument)
+{
+  /* USER CODE BEGIN StartSignalTask2 */
+  /* Infinite loop */
+  for(;;)
+  {
+    osDelay(1);
+  }
+  /* USER CODE END StartSignalTask2 */
+}
+
+/* USER CODE BEGIN Header_StartSignalTask3 */
+/**
+* @brief Function implementing the signalTask3 thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_StartSignalTask3 */
+void StartSignalTask3(void const * argument)
+{
+  /* USER CODE BEGIN StartSignalTask3 */
+  /* Infinite loop */
+  for(;;)
+  {
+    osDelay(1);
+  }
+  /* USER CODE END StartSignalTask3 */
 }
 
 /* Private application code --------------------------------------------------*/

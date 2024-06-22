@@ -24,7 +24,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "stdio.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -57,7 +57,12 @@ void MX_FREERTOS_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
+int __io__putchar(int ch)
+{
+	while(HAL_OK != HAL_UART_Transmit(&huart1, (uint8_t*)&ch, 1, 30000))
+	{}
+	return ch;
+}
 /* USER CODE END 0 */
 
 /**
@@ -90,7 +95,7 @@ int main(void)
   MX_GPIO_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
-
+  printf("\r\n FreeRTOS start ~ \r\n");
   /* USER CODE END 2 */
 
   /* Call init function for freertos objects (in freertos.c) */
